@@ -92,7 +92,7 @@ stages:
     - task: AzureWebApp@1
       displayName: 'Deploy to Azure App Service (Dev)'
       inputs:
-        azureSubscription: 'Azure-ServiceConnection-Dev'
+        azureSubscription: 'Azure-ServiceConnection'
         appType: 'webAppLinux'
         appName: '$(DevWebAppName)'
         package: '$(System.ArtifactsDirectory)/drop/*.zip'
@@ -119,7 +119,7 @@ stages:
     - task: AzureWebApp@1
       displayName: 'Deploy to Azure App Service (UAT)'
       inputs:
-        azureSubscription: 'Azure-ServiceConnection-UAT'
+        azureSubscription: 'Azure-ServiceConnection'
         appType: 'webAppLinux'
         appName: '$(UATWebAppName)'
         package: '$(System.ArtifactsDirectory)/drop/*.zip'
@@ -146,7 +146,7 @@ stages:
     - task: AzureWebApp@1
       displayName: 'Deploy to Azure App Service (Production)'
       inputs:
-        azureSubscription: 'Azure-ServiceConnection-Prod'
+        azureSubscription: 'Azure-ServiceConnection'
         appType: 'webAppLinux'
         appName: '$(ProdWebAppName)'
         package: '$(System.ArtifactsDirectory)/drop/*.zip'
