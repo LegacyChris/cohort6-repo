@@ -76,66 +76,78 @@ stages:
   dependsOn: Build
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   jobs:
-  - deployment: DeployDev
+  - job: DeployDev
     displayName: 'Deploy to Dev Environment'
-    environment: 'dev'
     pool:
       vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy to Azure App Service (Dev)'
-            inputs:
-              azureSubscription: 'Azure-ServiceConnection-Dev'
-              appType: 'webAppLinux'
-              appName: '$(DevWebAppName)'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-              runtimeStack: 'DOTNETCORE|9.0'
+    steps:
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download artifacts'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service (Dev)'
+      inputs:
+        azureSubscription: 'Azure-ServiceConnection-Dev'
+        appType: 'webAppLinux'
+        appName: '$(DevWebAppName)'
+        package: '$(System.ArtifactsDirectory)/drop/*.zip'
+        runtimeStack: 'DOTNETCORE|9.0'
 
 - stage: DeployUAT
   displayName: 'Deploy to UAT'
   dependsOn: Build
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   jobs:
-  - deployment: DeployUAT
+  - job: DeployUAT
     displayName: 'Deploy to UAT Environment'
-    environment: 'uat'
     pool:
       vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy to Azure App Service (UAT)'
-            inputs:
-              azureSubscription: 'Azure-ServiceConnection-UAT'
-              appType: 'webAppLinux'
-              appName: '$(UATWebAppName)'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-              runtimeStack: 'DOTNETCORE|9.0'
+    steps:
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download artifacts'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service (UAT)'
+      inputs:
+        azureSubscription: 'Azure-ServiceConnection-UAT'
+        appType: 'webAppLinux'
+        appName: '$(UATWebAppName)'
+        package: '$(System.ArtifactsDirectory)/drop/*.zip'
+        runtimeStack: 'DOTNETCORE|9.0'
 
 - stage: DeployProd
   displayName: 'Deploy to Production'
   dependsOn: DeployUAT
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   jobs:
-  - deployment: DeployProd
+  - job: DeployProd
     displayName: 'Deploy to Production Environment'
-    environment: 'production'
     pool:
       vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy to Azure App Service (Production)'
-            inputs:
-              azureSubscription: 'Azure-ServiceConnection-Prod'
-              appType: 'webAppLinux'
-              appName: '$(ProdWebAppName)'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-              runtimeStack: 'DOTNETCORE|9.0'
+    steps:
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download artifacts'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service (Production)'
+      inputs:
+        azureSubscription: 'Azure-ServiceConnection-Prod'
+        appType: 'webAppLinux'
+        appName: '$(ProdWebAppName)'
+        package: '$(System.ArtifactsDirectory)/drop/*.zip'
+        runtimeStack: 'DOTNETCORE|9.0'
