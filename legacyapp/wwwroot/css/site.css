@@ -1,18 +1,19 @@
 /* ===== Global Styles ===== */
 :root {
-  --primary-color: #0d6efd;
-  --secondary-color: #6c757d;
+  --primary-color: #00A8E8;
+  --secondary-color: #004E89;
   --success-color: #198754;
-  --info-color: #0dcaf0;
+  --info-color: #00D9FF;
   --warning-color: #ffc107;
   --danger-color: #dc3545;
-  --dark-color: #212529;
+  --dark-color: #1A1A2E;
   --light-color: #f8f9fa;
 }
 
 html {
   font-size: 14px;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -25,15 +26,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #333;
   line-height: 1.6;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem rgba(0, 168, 232, 0.5);
 }
 
 /* ===== Hero Section ===== */
 .hero-section {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #00A8E8 0%, #0077B6 100%);
   color: white;
   padding: 100px 0 80px;
   margin-bottom: 50px;
@@ -155,11 +160,11 @@ body {
 }
 
 .nav-pills .nav-link:hover {
-  background-color: rgba(13, 110, 253, 0.1);
+  background-color: rgba(0, 168, 232, 0.1);
 }
 
 .nav-pills .nav-link.active {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #00A8E8 0%, #0077B6 100%);
 }
 
 /* ===== Contact Form ===== */
@@ -172,7 +177,7 @@ body {
 
 .contact-form .form-control:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+  box-shadow: 0 0 0 0.2rem rgba(0, 168, 232, 0.15);
 }
 
 .contact-info-card {
@@ -259,13 +264,13 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #00A8E8 0%, #0077B6 100%);
   border: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 168, 232, 0.3);
 }
 
 .btn-lg {
@@ -317,11 +322,11 @@ body {
 
 /* ===== Utilities ===== */
 .bg-gradient-primary {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #00A8E8 0%, #0077B6 100%);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #00A8E8 0%, #0077B6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
